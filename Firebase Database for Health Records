@@ -1,0 +1,16 @@
+
+import firebase_admin
+from firebase_admin import credentials, firestore
+
+cred = credentials.Certificate("firebase_credentials.json")
+firebase_admin.initialize_app(cred)
+db = firestore.client()
+
+# Adding a new health record
+data = {
+    "mother_id": "12345",
+    "blood_pressure": "120/80",
+    "risk_level": "low"
+}
+db.collection("health_records").document("record_12345").set(data)
+print("Record added to Firebase")
