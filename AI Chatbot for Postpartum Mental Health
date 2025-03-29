@@ -1,0 +1,11 @@
+
+from transformers import pipeline
+
+chatbot = pipeline("text-generation", model="EleutherAI/gpt-neo-1.3B")
+
+while True:
+    user_input = input("Mother: ")
+    if user_input.lower() == "exit":
+        break
+    response = chatbot(user_input, max_length=50, num_return_sequences=1)
+    print("AI Assistant:", response[0]['generated_text'])
