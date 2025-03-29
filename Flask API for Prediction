@@ -1,0 +1,17 @@
+
+from flask import Flask, request, jsonify
+import joblib
+import numpy as np
+
+app = Flask(_name_)
+model = joblib.load('pregnancy_risk_model.pkl')
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    data = request.get_json()
+    features = np.array(data['features']).reshape(1, -1)
+    prediction = model.predict(features)
+    return jsonify({'risk_level': prediction[0]})
+
+if _name_ == '_main_':
+    app.run(debug=True)
