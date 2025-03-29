@@ -1,0 +1,13 @@
+
+from twilio.rest import Client
+
+account_sid = 'your_account_sid'
+auth_token = 'your_auth_token'
+client = Client(account_sid, auth_token)
+
+message = client.messages.create(
+    body="Reminder: Your child's vaccination is due tomorrow. Visit the nearest health center.",
+    from_='+1234567890',
+    to='+919876543210'
+)
+print("SMS Sent! Message SID:", message.sid)
